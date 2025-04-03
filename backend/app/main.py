@@ -106,7 +106,6 @@ def get_db() -> Session:
         db.close()
 
 async def process_task(task_id: int, filters: dict, db: Session):
-    print("Processing task...")
     try:
         # Get and validate task
         task = db.query(Task).filter(Task.id == task_id).first()
@@ -122,14 +121,10 @@ async def process_task(task_id: int, filters: dict, db: Session):
         # Load data
         twitter_data = load_twitter_data()
         instagram_data = load_instagram_data()
-        print("Data loaded")
-        print("twitter_data", twitter_data)
-        print("instagram_data", instagram_data)
 
         # Process data based on filters
         process_twitter_data(task_id, twitter_data, filters, db)
         process_instagram_data(task_id, instagram_data, filters, db)
-        print("Data processed")
 
         # Update task status to completed
         task.status = "completed"
@@ -157,14 +152,13 @@ def load_instagram_data():
         return pd.DataFrame()
 
 def process_twitter_data(task_id: int, data: list, filters: dict, db: Session):
-    print("Processing twitter data...")
     if not data or "twitter" not in filters.get("platforms", []):
         return
 
     for post in data:
         if not matches_filters(post, filters):
             continue
-        print("post", post)
+        
         db_post = Post(
             task_id=task_id,
             source="twitter",
@@ -177,22 +171,18 @@ def process_twitter_data(task_id: int, data: list, filters: dict, db: Session):
             hashtags=post["hashtags"],
             content_type=post["content_type"]
         )
-        print("db_post twitter", db_post)
+        
         db.add(db_post)
 
 def process_instagram_data(task_id: int, data: pd.DataFrame, filters: dict, db: Session):
-    print(f"Data received: {len(data)} rows")
-    print("Filters received:", filters)
     if data.empty or "instagram" not in filters.get("platforms", []):
         return
-    print("Processing instagram data...")
+    
     for _, row in data.iterrows():
         try:
-            print(f"Checking row: {row.to_dict()}") 
             if not matches_filters(row, filters):
                 continue
-            print("matches_filters")
-            print(task_id, row["timestamp"])
+            
             db_post = Post(
                 task_id=task_id,
                 source="instagram",
@@ -205,7 +195,7 @@ def process_instagram_data(task_id: int, data: pd.DataFrame, filters: dict, db: 
                 hashtags=row["hashtags"].split(",") if isinstance(row["hashtags"], str) else [],
                 content_type=row["content_type"]
             )
-            print("db_post instagram", db_post)
+            
             db.add(db_post)
         except Exception as e:
             print(f"Warning: Error processing Instagram row: {str(e)}")
