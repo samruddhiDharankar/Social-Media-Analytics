@@ -1,0 +1,52 @@
+[
+    {
+        "id": "t1",
+        "timestamp": "2022-01-15T10:30:00",
+        "content": "Just launched our new product! #Innovation #Tech",
+        "likes": 150,
+        "comments": 45,
+        "shares": 30,
+        "hashtags": ["Innovation", "Tech"],
+        "content_type": "text"
+    },
+    {
+        "id": "t2",
+        "timestamp": "2022-02-20T15:45:00",
+        "content": "Check out our latest blog post about AI trends! #AI #Future",
+        "likes": 200,
+        "comments": 60,
+        "shares": 40,
+        "hashtags": ["AI", "Future"],
+        "content_type": "text"
+    },
+    {
+        "id": "t3",
+        "timestamp": "2023-03-10T09:15:00",
+        "content": "Exciting news: We're expanding to new markets! #Growth #Business",
+        "likes": 300,
+        "comments": 80,
+        "shares": 50,
+        "hashtags": ["Growth", "Business"],
+        "content_type": "text"
+    },
+    {
+        "id": "t4",
+        "timestamp": "2023-04-05T14:20:00",
+        "content": "Join us for our annual tech conference! #TechConference #Networking",
+        "likes": 250,
+        "comments": 70,
+        "shares": 35,
+        "hashtags": ["TechConference", "Networking"],
+        "content_type": "text"
+    },
+    {
+        "id": "t5",
+        "timestamp": "2023-05-01T11:00:00",
+        "content": "New partnership announcement! #Partnership #Innovation",
+        "likes": 180,
+        "comments": 55,
+        "shares": 25,
+        "hashtags": ["Partnership", "Innovation"],
+        "content_type": "text"
+    }
+] 
